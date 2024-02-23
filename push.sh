@@ -5,7 +5,8 @@ set -xe
 USER='goferex'
 
 IMAGE_BASE='debian'
-IMAGE_TAG="${IMAGE_BASE}-20402323001"
+GIT_TAG='20402323001'
+IMAGE_TAG="${IMAGE_BASE}-${GIT_TAG}"
 SHORTHAND='debian'
 
 docker login
