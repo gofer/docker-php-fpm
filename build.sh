@@ -4,7 +4,7 @@ set -xe
 
 DOCKER_FILE='debian.dockerfile'
 
-IMAGE_NAME='php-dpm-base'
+IMAGE_NAME='php-fpm'
 IMAGE_TAG=20240223001
 
 CPU_PERIOD=100000
