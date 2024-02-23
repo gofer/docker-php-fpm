@@ -127,7 +127,7 @@ RUN apt install -y libsodium-dev \
 # RUN docker-php-ext-install spl
 
 # RUN apt install -y libargon2 \
-# && docker-php-ext-install standard
+#  && docker-php-ext-install standard
 
 RUN docker-php-ext-install sysvmsg
 
@@ -138,19 +138,19 @@ RUN docker-php-ext-install sysvshm
 RUN apt install -y libtidy-dev \
  && docker-php-ext-install tidy
 
-# docker-php-ext-install tokenizer
+# RUN docker-php-ext-install tokenizer
 
 RUN docker-php-ext-install xml
 
-# docker-php-ext-install xmlreader
+# RUN docker-php-ext-install xmlreader
 
 RUN docker-php-ext-install xmlwriter
 
 RUN apt install -y libxslt1-dev \
  && docker-php-ext-install xsl
 
-# docker-php-ext-configure zend_test CFLAGS=-I/usr/include/libxml2 \
-# && docker-php-ext-install zend_test
+# RUN docker-php-ext-configure zend_test CFLAGS=-I/usr/include/libxml2 \
+#  && docker-php-ext-install zend_test
 
 RUN apt install -y libzip-dev \
  && docker-php-ext-install zip

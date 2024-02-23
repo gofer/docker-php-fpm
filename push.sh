@@ -5,7 +5,7 @@ set -xe
 USER='goferex'
 
 IMAGE_BASE='debian'
-GIT_TAG='20402323001'
+GIT_TAG='20240223001'
 IMAGE_TAG="${IMAGE_BASE}-${GIT_TAG}"
 SHORTHAND='debian'
 
