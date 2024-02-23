@@ -1,6 +1,7 @@
 FROM php:fpm-alpine3.19 AS extensions-builder
 
-RUN apk update && apk upgrade
+RUN apk update && apk upgrade \
+ && apk add alpine-sdk build-base
 
 RUN docker-php-ext-install bcmath
 
