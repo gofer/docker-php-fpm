@@ -155,8 +155,11 @@ RUN apt install -y libxslt1-dev \
 RUN apt install -y libzip-dev \
  && docker-php-ext-install zip
 
+RUN pecl install xdebug
+
 RUN tar rf /artifacts.tar.gz /usr/local/lib/php/extensions \
- && tar rf /artifacts.tar.gz /usr/local/include/php/ext
+ && tar rf /artifacts.tar.gz /usr/local/include/php/ext \
+ && tar rf /artifacts.tar.gz /usr/local/etc/php/conf.d
 
 FROM php:fpm-bookworm
 
@@ -230,4 +233,5 @@ RUN docker-php-ext-enable \
   xml \
   xmlwriter \
   xsl \
-  zip
+  zip \
+  xdebug
