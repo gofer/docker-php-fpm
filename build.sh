@@ -4,7 +4,7 @@ set -xe
 
 DOCKER_FILE='debian.dockerfile'
 
-IMAGE_NAME='php-fpm'
+IMAGE_BASE='php-fpm'
 IMAGE_TAG='20240223001'
 
 CPU_PERIOD=100000
@@ -13,8 +13,8 @@ CPU_QUOTA=20000
 CONTAINER_NAME='artifact'
 ARTIFACT_NAME='root.tar.gz'
 
-IMAGE_NAME="${IMAGE_NAME}-${IMAGE_TAG}"
-BUILD_IMAGE_NAME="${IMAGE_NAME}-builder:${IMAGE_TAG}"
+IMAGE_NAME="${IMAGE_BASE}:${IMAGE_TAG}"
+BUILD_IMAGE_NAME="${IMAGE_BASE}-builder:${IMAGE_TAG}"
 
 docker build \
   --file "${DOCKER_FILE}" \
