@@ -157,8 +157,12 @@ RUN apk add libxslt-dev \
 RUN apk add libzip-dev \
  && docker-php-ext-install zip
 
+RUN apk add alpine-sdk build-base autoconf linux-headers \
+ && pecl install xdebug
+
 RUN tar rf /artifacts.tar.gz /usr/local/lib/php/extensions \
- && tar rf /artifacts.tar.gz /usr/local/include/php/ext
+ && tar rf /artifacts.tar.gz /usr/local/include/php/ext \
+ && tar rf /artifacts.tar.gz /usr/local/etc/php/conf.d
 
 FROM php:fpm-alpine3.19
 
@@ -166,7 +170,22 @@ COPY --from=extensions-builder /artifacts.tar.gz /
 
 RUN tar xf /artifacts.tar.gz -C /
 
-RUN apk update && apk upgrade
+RUN apk update && apk upgrade \
+ && apk add \
+   libbz2 \
+   enchant2-libs \
+   libpng \
+   gmp \
+   c-client \
+   icu-libs \
+   libldap \
+   freetds \
+   libpq \
+   aspell-libs \
+   net-snmp-libs \
+   tidyhtml-libs \
+   libxslt \
+   libzip
 
 RUN docker-php-ext-enable \
   bcmath \
@@ -186,7 +205,6 @@ RUN docker-php-ext-enable \
   gd \
   gettext \
   gmp \
-  iconv \
   imap \
   intl \
   ldap \
@@ -196,7 +214,6 @@ RUN docker-php-ext-enable \
   pcntl \
   pdo \
   pdo_dblib \
-  pdo_firebird \
   pdo_mysql \
   pdo_odbc \
   pdo_pgsql \
@@ -219,4 +236,5 @@ RUN docker-php-ext-enable \
   xml \
   xmlwriter \
   xsl \
-  zip
+  zip \
+  xdebug
