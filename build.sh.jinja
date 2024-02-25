@@ -11,8 +11,6 @@ IMAGE_NAME='{{repository}}:{{base}}-{{tag_name}}'
 CONTAINER_NAME='artifact'
 ARTIFACT_NAME='root.tar.gz'
 
-git checkout {{tag_name}}
-
 docker build \
   --file "${BUILD_DOCKER_FILE}" \
   --tag "${BUILD_IMAGE_NAME}" \
