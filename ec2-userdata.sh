@@ -4,7 +4,7 @@ set -xe
 
 yum update && yum upgrade
 
-yum install -y git docker tmux
+yum install -y git docker python3-pip tmux
 
 systemctl enable docker && systemctl start docker
 
