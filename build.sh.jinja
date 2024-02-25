@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -xe
+
+BUILD_DOCKER_FILE='{{base}}.dockerfile'
+IMAGE_DOCKER_FILE='image.dockerfile'
+
+BUILD_IMAGE_NAME='{{repository}}-build:{{base}}-{{tag_name}}'
+IMAGE_NAME='{{repository}}:{{base}}-{{tag_name}}'
+
+CONTAINER_NAME='artifact'
+ARTIFACT_NAME='root.tar.gz'
+
+git checkout {{tag_name}}
+
+docker build \
+  --file "${BUILD_DOCKER_FILE}" \
+  --tag "${BUILD_IMAGE_NAME}" \
+  --cpu-period='{{cpu_period}}' \
+  --cpu-quota='{{cpu_quota}}' \
+  .
+
+docker run \
+  --detach \
+  --name "${CONTAINER_NAME}" \
+  "${BUILD_IMAGE_NAME}"
+
+docker export \
+  --output "${ARTIFACT_NAME}" \
+  "${CONTAINER_NAME}"
+
+docker stop "${CONTAINER_NAME}"
+
+docker rm "${CONTAINER_NAME}"
+
+docker build \
+  --file "${IMAGE_DOCKER_FILE}" \
+  --tag "${IMAGE_NAME}" \
+  --cpu-period='{{cpu_period}}' \
+  --cpu-quota='{{cpu_quota}}' \
+  .
