@@ -8,7 +8,8 @@ IMAGE_TAG='{{base}}-{{tag_name}}'
 
 SHORTHANDS='{{shorthands}}'
 
-docker login
+docker login --username '{{user}}'
+
 docker tag "${LOCAL_IMAGE}" "{{user}}/{{repository}}:${IMAGE_TAG}"
 docker push "{{user}}/{{repository}}:${IMAGE_TAG}"
 
