@@ -2,7 +2,6 @@
 
 set -xe
 
-REPOSITORY_URL='https://github.com/gofer/docker-php-fpm'
 BUILD_DOCKER_FILE='{{base}}.dockerfile'
 IMAGE_DOCKER_FILE='image.dockerfile'
 
@@ -12,9 +11,7 @@ IMAGE_NAME='{{repository}}:{{base}}-{{tag_name}}'
 CONTAINER_NAME='artifact'
 ARTIFACT_NAME='root.tar.gz'
 
-git clone "${REPOSITORY_URL}"
 git checkout {{tag_name}}
-pip3 install -t vendor -r requirements.txt
 
 docker build \
   --file "${BUILD_DOCKER_FILE}" \
