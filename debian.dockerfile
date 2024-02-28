@@ -34,7 +34,8 @@ RUN docker-php-ext-install filter
 
 RUN docker-php-ext-install ftp
 
-RUN apt install -y libpng-dev \
+RUN apt install -y libavif-dev libfreetype-dev libjpeg62-turbo-dev libpng-dev libwebp-dev zlib1g-dev \
+ && docker-php-ext-configure gd --with-avif --with-webp --with-jpeg --with-freetype --enable-gd-jis-conv \
  && docker-php-ext-install gd
 
 RUN docker-php-ext-install gettext
@@ -170,7 +171,11 @@ RUN tar xf /artifacts.tar.gz -C /
 RUN apt update -y && apt upgrade -y \
  && apt install -y \
     libenchant-2-2 \
+    libavif15 \
+    libwebp7 \
     libpng16-16 \
+    libjpeg62-turbo \
+    libfreetype6 \
     libc-client2007e \
     libsybdb5 \
     libfbclient2 \

@@ -35,7 +35,8 @@ RUN docker-php-ext-install filter
 
 RUN docker-php-ext-install ftp
 
-RUN apk add libpng-dev \
+RUN apk add freetype-dev libavif-dev libjpeg-turbo-dev libpng-dev libwebp-dev zlib-dev \
+ && docker-php-ext-configure gd --with-avif --with-webp --with-jpeg --with-freetype --enable-gd-jis-conv \
  && docker-php-ext-install gd
 
 RUN docker-php-ext-install gettext
@@ -172,20 +173,25 @@ RUN tar xf /artifacts.tar.gz -C /
 
 RUN apk update && apk upgrade \
  && apk add \
-   libbz2 \
-   enchant2-libs \
-   libpng \
-   gmp \
-   c-client \
-   icu-libs \
-   libldap \
-   freetds \
-   libpq \
-   aspell-libs \
-   net-snmp-libs \
-   tidyhtml-libs \
-   libxslt \
-   libzip
+    libbz2 \
+    enchant2-libs \
+    freetype \
+    libavif \
+    libjpeg-turbo \
+    libpng \
+    libwebp \
+    gmp \
+    c-client \
+    icu-libs \
+    libldap \
+    freetds \
+    libpq \
+    aspell-libs \
+    net-snmp-libs \
+    tidyhtml-libs \
+    libxslt \
+    libzip \
+    zlib
 
 RUN docker-php-ext-enable \
   bcmath \
